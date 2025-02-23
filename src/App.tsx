@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import './App.css'
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg'
+import { useState } from 'react';
+import './App.css';
+import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
+import { Player, Video, DefaultUi, TimeProgress, Ui } from '@vime/react';
 
 function App() {
   const [videoSrc, setVideoSrc] = useState('');
@@ -19,7 +20,8 @@ function App() {
     setVideoSrc(URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' })));
   };
 
-  const doTrim = async () => {
+  const doTrim = async ({ tg }: any) => {
+    console.log(tg);
     setMessage('Loading ffmpeg-core.js');
     await ffmpeg.load();
     setMessage('Start trimming');
@@ -33,6 +35,29 @@ function App() {
   return (
     <>
       <div>
+        <Player
+          theme="dark"
+          style={{ '--vm-player-theme': '#e86c8b' }}
+        >
+          <Video
+            crossOrigin
+            poster="https://files.vidstack.io/agent-327/poster.png"
+          >
+            <source
+              data-src="https://files.vidstack.io/agent-327/720p.mp4"
+              type="video/mp4"
+            />
+            <track
+              default
+              kind="subtitles"
+              src="https://files.vidstack.io/agent-327/subs/english.vtt"
+              srclang="en"
+              label="English"
+            />
+          </Video>
+          
+          <Ui><TimeProgress separator=":3" /></Ui>
+        </Player>
         <video src={videoSrc} controls></video><br />
         <button onClick={doTranscode} className="logo">Start</button>
         <p>{message}</p>

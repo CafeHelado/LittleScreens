@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ffmpeg/ffmpeg": "0.11.6",
     "@ffmpeg/core": "0.11.0",
+    "@ffmpeg/ffmpeg": "0.11.6",
+    "@vime/core": "^5.4.1",
+    "@vime/react": "^5.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
